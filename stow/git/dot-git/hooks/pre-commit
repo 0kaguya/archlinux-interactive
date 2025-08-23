@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+name=$(hexdump -n 4 -e '"%02x"' < /dev/urandom) # random name
+
+docker build -t "$name" . ||
+    (echo "Docker build failed" && exit 1)
+
+docker image rm "$name"
